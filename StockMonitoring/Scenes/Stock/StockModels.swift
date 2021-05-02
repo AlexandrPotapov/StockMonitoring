@@ -12,7 +12,7 @@
 
 import UIKit
 
-enum Stock
+enum StockModel
 {
   // MARK: Use cases
   
@@ -21,19 +21,25 @@ enum Stock
     struct Request
     {
         enum RequestType {
-            case getStocks
+            case getStocks(requestNeedsCancel: Bool)
+            case getStocksWithFavouriteAtrtibute
+            case getFavouriteStocks
+            case getSearch(request: String)
         }
     }
     struct Response
     {
         enum ResponseType {
-            case presentStocks(stocksResponse: [MostWatchedTickers])
+            case presentStocks(stocksResponse: [Stock])
+            case hideActivityIndicator
+
         }
     }
     struct ViewModel
     {
         enum ViewModelData {
             case displayStock(stockViewModel: StockViewModel)
+            case hideActivityIndicator
         }
     }
   }
@@ -41,19 +47,12 @@ enum Stock
 
 struct StockViewModel {
     struct Cell: StockCellViewModel {
-        var ticker: String
-        
+        var ticker: String?
         var name: String?
-        
-        var price: String?
-        
-        var change: String?
-        
-        var changePercent: String?
-        
-        var favorite: Bool
-        
-        
+        var price: Double?
+        var change: Double?
+        var changePercent: Double?
+        var isFavorite: Bool?
     }
     
     let cells: [Cell]

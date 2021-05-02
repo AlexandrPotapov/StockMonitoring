@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1F158EF6262979E5007119E5 /* StocksSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F158EF5262979E5007119E5 /* StocksSegmentedControl.swift */; };
+		1F158F022629B1B0007119E5 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F158F012629B1B0007119E5 /* Montserrat-SemiBold.ttf */; };
+		1F158F052629B1CA007119E5 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F158F042629B1CA007119E5 /* Montserrat-Bold.ttf */; };
+		1F1FE607262EF177000E3067 /* FavouriteStocksCoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FE606262EF177000E3067 /* FavouriteStocksCoreDataStore.swift */; };
+		1F4E0049262C49BE007B2E3D /* StockMonitoring.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0047262C49BE007B2E3D /* StockMonitoring.xcdatamodeld */; };
+		1F4E0055262C4E29007B2E3D /* CardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E004F262C4E29007B2E3D /* CardPresenter.swift */; };
+		1F4E0056262C4E29007B2E3D /* CardWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0050262C4E29007B2E3D /* CardWorker.swift */; };
+		1F4E0057262C4E29007B2E3D /* CardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0051262C4E29007B2E3D /* CardRouter.swift */; };
+		1F4E0058262C4E29007B2E3D /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0052262C4E29007B2E3D /* CardModels.swift */; };
+		1F4E0059262C4E29007B2E3D /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0053262C4E29007B2E3D /* CardViewController.swift */; };
+		1F4E005A262C4E29007B2E3D /* CardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4E0054262C4E29007B2E3D /* CardInteractor.swift */; };
 		1F4F39ED260F980E00BDB399 /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F39EC260F980E00BDB399 /* Stock.swift */; };
 		1F4F39F2260F989400BDB399 /* StockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F39F1260F989400BDB399 /* StockData.swift */; };
 		1F4F7278261067500071E5AC /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F7275261067500071E5AC /* NetworkDataFetcher.swift */; };
@@ -18,22 +29,37 @@
 		1F4F74512613687C0020E16E /* StockModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F744B2613687C0020E16E /* StockModels.swift */; };
 		1F4F74522613687C0020E16E /* StockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F744C2613687C0020E16E /* StockViewController.swift */; };
 		1F4F74532613687C0020E16E /* StockInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4F744D2613687C0020E16E /* StockInteractor.swift */; };
-		1F4FC6FC2611EA5000FB6CD6 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC6FB2611EA5000FB6CD6 /* DetailViewController.swift */; };
-		1F4FC6FF261204E900FB6CD6 /* button1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC6FE261204E900FB6CD6 /* button1ViewController.swift */; };
-		1F4FC702261204F900FB6CD6 /* button2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC701261204F900FB6CD6 /* button2ViewController.swift */; };
 		1F4FC705261220C500FB6CD6 /* StocksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC704261220C500FB6CD6 /* StocksCell.swift */; };
 		1F4FC70C2612217C00FB6CD6 /* StocksCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1F4FC70B2612217C00FB6CD6 /* StocksCell.xib */; };
-		1F4FC70F26122B2C00FB6CD6 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F4FC70E26122B2C00FB6CD6 /* ViewControllerExtension.swift */; };
-		1FA53C6C261626BA009BACB7 /* FavoriteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA53C6B261626BA009BACB7 /* FavoriteView.swift */; };
+		1F6EBC5926289D3500EE52A0 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F6EBC5826289D3500EE52A0 /* Montserrat-Regular.ttf */; };
+		1F6EBD2D2626DA21008D5D1F /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EBD2C2626DA21008D5D1F /* TitleView.swift */; };
+		1F6EBD33262710CC008D5D1F /* InertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EBD32262710CC008D5D1F /* InertableTextField.swift */; };
+		1F77492D263D971A002C9BB3 /* GetStockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F77492C263D971A002C9BB3 /* GetStockOperation.swift */; };
+		1F86AF42263B0E51004C95FE /* SearchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F86AF41263B0E51004C95FE /* SearchOperations.swift */; };
+		1F88CD54263C315B002CD912 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD53263C315B002CD912 /* AsyncOperation.swift */; };
+		1F88CD57263C318E002CD912 /* SearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD56263C318E002CD912 /* SearchOperation.swift */; };
+		1F88CD5A263C31A1002CD912 /* GetStockQuotesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD59263C31A1002CD912 /* GetStockQuotesOperation.swift */; };
+		1F88CD5D263C4053002CD912 /* SearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD5C263C4053002CD912 /* SearchProvider.swift */; };
+		1F88CD65263C473E002CD912 /* FoundStocksOutputOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD64263C473E002CD912 /* FoundStocksOutputOperation.swift */; };
 		1FD1DFD6260E5BEB001A7125 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1DFD5260E5BEB001A7125 /* AppDelegate.swift */; };
 		1FD1DFD8260E5BEB001A7125 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1DFD7260E5BEB001A7125 /* SceneDelegate.swift */; };
-		1FD1DFDA260E5BEB001A7125 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD1DFD9260E5BEB001A7125 /* ViewController.swift */; };
 		1FD1DFDD260E5BEB001A7125 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD1DFDB260E5BEB001A7125 /* Main.storyboard */; };
 		1FD1DFDF260E5BED001A7125 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FD1DFDE260E5BED001A7125 /* Assets.xcassets */; };
 		1FD1DFE2260E5BED001A7125 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FD1DFE0260E5BED001A7125 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1F158EF5262979E5007119E5 /* StocksSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksSegmentedControl.swift; sourceTree = "<group>"; };
+		1F158F012629B1B0007119E5 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		1F158F042629B1CA007119E5 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		1F1FE606262EF177000E3067 /* FavouriteStocksCoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteStocksCoreDataStore.swift; sourceTree = "<group>"; };
+		1F4E0048262C49BE007B2E3D /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		1F4E004F262C4E29007B2E3D /* CardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresenter.swift; sourceTree = "<group>"; };
+		1F4E0050262C4E29007B2E3D /* CardWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWorker.swift; sourceTree = "<group>"; };
+		1F4E0051262C4E29007B2E3D /* CardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRouter.swift; sourceTree = "<group>"; };
+		1F4E0052262C4E29007B2E3D /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
+		1F4E0053262C4E29007B2E3D /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		1F4E0054262C4E29007B2E3D /* CardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInteractor.swift; sourceTree = "<group>"; };
 		1F4F39EC260F980E00BDB399 /* Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		1F4F39F1260F989400BDB399 /* StockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockData.swift; sourceTree = "<group>"; };
 		1F4F7275261067500071E5AC /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
@@ -45,17 +71,21 @@
 		1F4F744B2613687C0020E16E /* StockModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModels.swift; sourceTree = "<group>"; };
 		1F4F744C2613687C0020E16E /* StockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockViewController.swift; sourceTree = "<group>"; };
 		1F4F744D2613687C0020E16E /* StockInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockInteractor.swift; sourceTree = "<group>"; };
-		1F4FC6FB2611EA5000FB6CD6 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		1F4FC6FE261204E900FB6CD6 /* button1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button1ViewController.swift; sourceTree = "<group>"; };
-		1F4FC701261204F900FB6CD6 /* button2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button2ViewController.swift; sourceTree = "<group>"; };
 		1F4FC704261220C500FB6CD6 /* StocksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksCell.swift; sourceTree = "<group>"; };
 		1F4FC70B2612217C00FB6CD6 /* StocksCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StocksCell.xib; sourceTree = "<group>"; };
-		1F4FC70E26122B2C00FB6CD6 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
-		1FA53C6B261626BA009BACB7 /* FavoriteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteView.swift; sourceTree = "<group>"; };
+		1F6EBC5826289D3500EE52A0 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		1F6EBD2C2626DA21008D5D1F /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
+		1F6EBD32262710CC008D5D1F /* InertableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InertableTextField.swift; sourceTree = "<group>"; };
+		1F77492C263D971A002C9BB3 /* GetStockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStockOperation.swift; sourceTree = "<group>"; };
+		1F86AF41263B0E51004C95FE /* SearchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOperations.swift; sourceTree = "<group>"; };
+		1F88CD53263C315B002CD912 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
+		1F88CD56263C318E002CD912 /* SearchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOperation.swift; sourceTree = "<group>"; };
+		1F88CD59263C31A1002CD912 /* GetStockQuotesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStockQuotesOperation.swift; sourceTree = "<group>"; };
+		1F88CD5C263C4053002CD912 /* SearchProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProvider.swift; sourceTree = "<group>"; };
+		1F88CD64263C473E002CD912 /* FoundStocksOutputOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundStocksOutputOperation.swift; sourceTree = "<group>"; };
 		1FD1DFD2260E5BEB001A7125 /* StockMonitoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StockMonitoring.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FD1DFD5260E5BEB001A7125 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FD1DFD7260E5BEB001A7125 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		1FD1DFD9260E5BEB001A7125 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		1FD1DFDC260E5BEB001A7125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1FD1DFDE260E5BED001A7125 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1FD1DFE1260E5BED001A7125 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,12 +103,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F4E005C262C4E3C007B2E3D /* Card */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E004F262C4E29007B2E3D /* CardPresenter.swift */,
+				1F4E0050262C4E29007B2E3D /* CardWorker.swift */,
+				1F4E0051262C4E29007B2E3D /* CardRouter.swift */,
+				1F4E0052262C4E29007B2E3D /* CardModels.swift */,
+				1F4E0053262C4E29007B2E3D /* CardViewController.swift */,
+				1F4E0054262C4E29007B2E3D /* CardInteractor.swift */,
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		1F4F39E2260F7E3A00BDB399 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				1F4F7276261067500071E5AC /* API.swift */,
 				1F4F7275261067500071E5AC /* NetworkDataFetcher.swift */,
 				1F4F7277261067500071E5AC /* NetworkService.swift */,
+				1F1FE606262EF177000E3067 /* FavouriteStocksCoreDataStore.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -95,6 +139,7 @@
 		1F4F74472613684F0020E16E /* Stock */ = {
 			isa = PBXGroup;
 			children = (
+				1F158EF5262979E5007119E5 /* StocksSegmentedControl.swift */,
 				1F4F74482613687C0020E16E /* StockPresenter.swift */,
 				1F4F74492613687C0020E16E /* StockWorker.swift */,
 				1F4F744A2613687C0020E16E /* StockRouter.swift */,
@@ -112,6 +157,46 @@
 				1F4FC70B2612217C00FB6CD6 /* StocksCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		1F6EBC5726289D2100EE52A0 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				1F158F042629B1CA007119E5 /* Montserrat-Bold.ttf */,
+				1F158F012629B1B0007119E5 /* Montserrat-SemiBold.ttf */,
+				1F6EBC5826289D3500EE52A0 /* Montserrat-Regular.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
+		1F6EBD2F2626DA2B008D5D1F /* TitleView */ = {
+			isa = PBXGroup;
+			children = (
+				1F6EBD2C2626DA21008D5D1F /* TitleView.swift */,
+				1F6EBD32262710CC008D5D1F /* InertableTextField.swift */,
+			);
+			path = TitleView;
+			sourceTree = "<group>";
+		};
+		1F88CD52263C3132002CD912 /* Operations */ = {
+			isa = PBXGroup;
+			children = (
+				1F88CD53263C315B002CD912 /* AsyncOperation.swift */,
+				1F88CD56263C318E002CD912 /* SearchOperation.swift */,
+				1F88CD59263C31A1002CD912 /* GetStockQuotesOperation.swift */,
+				1F88CD64263C473E002CD912 /* FoundStocksOutputOperation.swift */,
+				1F77492C263D971A002C9BB3 /* GetStockOperation.swift */,
+			);
+			path = Operations;
+			sourceTree = "<group>";
+		};
+		1FBD48812633296A00E9EE62 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1F4E005C262C4E3C007B2E3D /* Card */,
+				1F4F74472613684F0020E16E /* Stock */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		1FD1DFC9260E5BEB001A7125 = {
@@ -133,22 +218,22 @@
 		1FD1DFD4260E5BEB001A7125 /* StockMonitoring */ = {
 			isa = PBXGroup;
 			children = (
-				1F4F74472613684F0020E16E /* Stock */,
+				1F88CD5C263C4053002CD912 /* SearchProvider.swift */,
+				1F88CD52263C3132002CD912 /* Operations */,
 				1F4FC707261220CA00FB6CD6 /* Cell */,
-				1FD1DFD5260E5BEB001A7125 /* AppDelegate.swift */,
-				1FD1DFD7260E5BEB001A7125 /* SceneDelegate.swift */,
+				1F6EBD2F2626DA2B008D5D1F /* TitleView */,
+				1F6EBC5726289D2100EE52A0 /* Font */,
+				1FBD48812633296A00E9EE62 /* Scenes */,
 				1F4F39F0260F981400BDB399 /* Model */,
 				1F4F39E2260F7E3A00BDB399 /* Services */,
-				1FD1DFD9260E5BEB001A7125 /* ViewController.swift */,
-				1F4FC70E26122B2C00FB6CD6 /* ViewControllerExtension.swift */,
 				1FD1DFDB260E5BEB001A7125 /* Main.storyboard */,
-				1F4FC701261204F900FB6CD6 /* button2ViewController.swift */,
-				1F4FC6FE261204E900FB6CD6 /* button1ViewController.swift */,
-				1F4FC6FB2611EA5000FB6CD6 /* DetailViewController.swift */,
+				1FD1DFD5260E5BEB001A7125 /* AppDelegate.swift */,
+				1F4E0047262C49BE007B2E3D /* StockMonitoring.xcdatamodeld */,
+				1FD1DFD7260E5BEB001A7125 /* SceneDelegate.swift */,
 				1FD1DFDE260E5BED001A7125 /* Assets.xcassets */,
 				1FD1DFE0260E5BED001A7125 /* LaunchScreen.storyboard */,
 				1FD1DFE3260E5BED001A7125 /* Info.plist */,
-				1FA53C6B261626BA009BACB7 /* FavoriteView.swift */,
+				1F86AF41263B0E51004C95FE /* SearchOperations.swift */,
 			);
 			path = StockMonitoring;
 			sourceTree = "<group>";
@@ -210,10 +295,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1F158F022629B1B0007119E5 /* Montserrat-SemiBold.ttf in Resources */,
 				1FD1DFE2260E5BED001A7125 /* LaunchScreen.storyboard in Resources */,
 				1FD1DFDF260E5BED001A7125 /* Assets.xcassets in Resources */,
 				1F4FC70C2612217C00FB6CD6 /* StocksCell.xib in Resources */,
+				1F6EBC5926289D3500EE52A0 /* Montserrat-Regular.ttf in Resources */,
 				1FD1DFDD260E5BEB001A7125 /* Main.storyboard in Resources */,
+				1F158F052629B1CA007119E5 /* Montserrat-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,24 +312,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F4FC70F26122B2C00FB6CD6 /* ViewControllerExtension.swift in Sources */,
 				1F4F74532613687C0020E16E /* StockInteractor.swift in Sources */,
 				1F4F74522613687C0020E16E /* StockViewController.swift in Sources */,
 				1F4F74502613687C0020E16E /* StockRouter.swift in Sources */,
-				1F4FC6FC2611EA5000FB6CD6 /* DetailViewController.swift in Sources */,
 				1F4F7278261067500071E5AC /* NetworkDataFetcher.swift in Sources */,
-				1FD1DFDA260E5BEB001A7125 /* ViewController.swift in Sources */,
+				1F4E0059262C4E29007B2E3D /* CardViewController.swift in Sources */,
 				1FD1DFD6260E5BEB001A7125 /* AppDelegate.swift in Sources */,
-				1FA53C6C261626BA009BACB7 /* FavoriteView.swift in Sources */,
+				1F158EF6262979E5007119E5 /* StocksSegmentedControl.swift in Sources */,
+				1F77492D263D971A002C9BB3 /* GetStockOperation.swift in Sources */,
+				1F4E0056262C4E29007B2E3D /* CardWorker.swift in Sources */,
 				1F4F39F2260F989400BDB399 /* StockData.swift in Sources */,
 				1F4F727A261067500071E5AC /* NetworkService.swift in Sources */,
 				1F4F74512613687C0020E16E /* StockModels.swift in Sources */,
+				1F88CD65263C473E002CD912 /* FoundStocksOutputOperation.swift in Sources */,
 				1F4FC705261220C500FB6CD6 /* StocksCell.swift in Sources */,
+				1F4E0058262C4E29007B2E3D /* CardModels.swift in Sources */,
+				1F88CD5A263C31A1002CD912 /* GetStockQuotesOperation.swift in Sources */,
 				1F4F744F2613687C0020E16E /* StockWorker.swift in Sources */,
-				1F4FC702261204F900FB6CD6 /* button2ViewController.swift in Sources */,
+				1F6EBD33262710CC008D5D1F /* InertableTextField.swift in Sources */,
+				1F88CD5D263C4053002CD912 /* SearchProvider.swift in Sources */,
+				1F4E005A262C4E29007B2E3D /* CardInteractor.swift in Sources */,
+				1F88CD54263C315B002CD912 /* AsyncOperation.swift in Sources */,
 				1F4F744E2613687C0020E16E /* StockPresenter.swift in Sources */,
-				1F4FC6FF261204E900FB6CD6 /* button1ViewController.swift in Sources */,
+				1F1FE607262EF177000E3067 /* FavouriteStocksCoreDataStore.swift in Sources */,
 				1F4F39ED260F980E00BDB399 /* Stock.swift in Sources */,
+				1F4E0057262C4E29007B2E3D /* CardRouter.swift in Sources */,
+				1F6EBD2D2626DA21008D5D1F /* TitleView.swift in Sources */,
+				1F86AF42263B0E51004C95FE /* SearchOperations.swift in Sources */,
+				1F88CD57263C318E002CD912 /* SearchOperation.swift in Sources */,
+				1F4E0055262C4E29007B2E3D /* CardPresenter.swift in Sources */,
+				1F4E0049262C49BE007B2E3D /* StockMonitoring.xcdatamodeld in Sources */,
 				1F4F7279261067500071E5AC /* API.swift in Sources */,
 				1FD1DFD8260E5BEB001A7125 /* SceneDelegate.swift in Sources */,
 			);
@@ -445,6 +545,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		1F4E0047262C49BE007B2E3D /* StockMonitoring.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				1F4E0048262C49BE007B2E3D /* Model.xcdatamodel */,
+			);
+			currentVersion = 1F4E0048262C49BE007B2E3D /* Model.xcdatamodel */;
+			path = StockMonitoring.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 1FD1DFCA260E5BEB001A7125 /* Project object */;
 }

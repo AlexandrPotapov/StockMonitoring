@@ -3,28 +3,16 @@
 //  StockMonitoring
 //
 //  Created by Александр on 27.03.2021.
-//
 
-//import Foundation
-//
-//struct Stock {
-//    
-//    let stock: Stock
-//    
-//    var symbol: String {
-//        return self.stock.symbol.uppercased()
-//    }
-//    
-//    var description: String {
-//        return self.stock.description
-//    }
-//    
-//    var price: String {
-//        return String(format: "%.2f",self.stock.price)
-//    }
-//    
-//    var change: String {
-//        return self.stock.change
-//    }
-//    
-//}
+
+import Foundation
+
+struct Stock {
+    var ticker: String = ""
+    var nameCompany: String?
+    var price: Double?
+    var change: Double?
+    var changePercent: Double?
+    var isFavourite: Bool = false
+}
+

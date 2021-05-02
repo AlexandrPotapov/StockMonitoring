@@ -9,35 +9,51 @@
 import Foundation
 
 protocol DataFetcher {
-    func getMostWatchedResponse(response: @escaping ([MostWatchedTickers]?) -> Void)
     func getQuoteResponse(value: String, response: @escaping ([StockQuote]?) -> Void)
-    func getNewsResponse(symbol: String, response: @escaping (NewsCompany?) -> Void)
-    func getHistoryResponse(symbol: String, interval: String, diffAndSplits: String, response: @escaping (QuoteHistory?) -> Void)
+    func getCollectionsResponse(list: String, start: String, response: @escaping (Collections?) -> Void)
+    func getSearchResponse(value: String, response: @escaping (StockSearch?) -> Void)
 }
 
 struct NetworkDataFetcher: DataFetcher {
+    
+    func getSearchResponse(value: String, response: @escaping (StockSearch?) -> Void) {
+        
+        let params = ["q": value]
+        networking.requestWithToken(path: EndPoint.search.rawValue, params: params) { (data, error) in
+            if let error = error {
+                print("Error received requesting data: \(error.localizedDescription)")
+                response(nil)
+            }
+            guard let data = data else { return }
+            
+            let decoded = self.decodeJSON(type: StockSearch.self, from: data)
+            response(decoded)
+        }
+    }
+    
+    
+    func getCollectionsResponse(list: String, start: String, response: @escaping (Collections?) -> Void) {
+        let params = ["list": list, "start": start]
+        networking.request(path: EndPoint.collections.rawValue, params: params) { (data, error) in
+            if let error = error {
+                print("Error received requesting data: \(error.localizedDescription)")
+                response(nil)
+            }
+            guard let data = data else { return }
+            
+            let decoded = self.decodeJSON(type: Collections.self, from: data)
+            
+            response(decoded)
+        }
+    }
+    
     
     let networking: Networking
     
     init(networking: Networking) {
         self.networking = networking
     }
-    
-    func getMostWatchedResponse(response: @escaping ([MostWatchedTickers]?) -> Void) {
-        
-        let params = [String: String]()
-        networking.request(path: EndPoint.trending.rawValue, params: params) { (data, error) in
-            if let error = error {
-                print("Error received requesting data: \(error.localizedDescription)")
-                response(nil)
-            }
-            guard let data = data else { return }
-            print(111)
-            let decoded = self.decodeJSON(type: [MostWatchedTickers].self, from: data)
-//            print(decoded?.count)
-            response(decoded)
-        }
-    }
+
     
     func getQuoteResponse(value: String, response: @escaping ([StockQuote]?) -> Void) {
         
@@ -52,38 +68,6 @@ struct NetworkDataFetcher: DataFetcher {
             let decoded = self.decodeJSON(type: [StockQuote].self, from: data)
             response(decoded)
         }
-    }
-    
-    func getNewsResponse(symbol: String, response: @escaping (NewsCompany?) -> Void) {
-        
-        let params = ["symbol": symbol]
-        networking.request(path: EndPoint.news.rawValue, params: params) { (data, error) in
-            if let error = error {
-                print("Error received requesting data: \(error.localizedDescription)")
-                response(nil)
-            }
-            guard let data = data else { return }
-            
-            let decoded = self.decodeJSON(type: NewsCompany.self, from: data)
-            response(decoded)
-        }
-        
-    }
-    
-    func getHistoryResponse(symbol: String, interval: String, diffAndSplits: String, response: @escaping (QuoteHistory?) -> Void) {
-        
-        let params = ["symbol": symbol, "interval": interval, "diffandsplits": diffAndSplits]
-        networking.request(path: EndPoint.history.rawValue, params: params) { (data, error) in
-            if let error = error {
-                print("Error received requesting data: \(error.localizedDescription)")
-                response(nil)
-            }
-            guard let data = data else { return }
-            
-            let decoded = self.decodeJSON(type: QuoteHistory.self, from: data)
-            response(decoded)
-        }
-        
     }
     
     private func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {

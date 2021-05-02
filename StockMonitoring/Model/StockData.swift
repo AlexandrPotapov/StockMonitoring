@@ -7,52 +7,37 @@
 
 import Foundation
 
-struct Stocks {
-    let stocks: [StockQuote?]
-}
 
 struct StockQuote: Decodable {
     let symbol: String?
     let shortName: String?
-    let postMarketPrice: Double?
+    let regularMarketPrice: Double?
     let regularMarketChange: Double?
     let regularMarketChangePercent: Double?
 }
 
-struct MostWatchedTickers: Decodable {
-    let count: Int?
-    let quotes: [String]
+struct Collections: Decodable {
+    let start: Int
+    let count: Int
+    let total: Int
+    let description: String
+    let quotes: [StockQuote]
 }
 
-struct NewsCompany: Decodable {
-    let item : [NewsData]?
+struct StockSearch: Decodable {
+    let count: Int
+    let result: [SearchResult]
 }
 
-struct NewsData: Decodable {
-    let description: String?
-    let guid: String?
-    let link: String?
-    let pubDate: String?
-    let title: String?
+struct SearchResult: Decodable, Equatable {
+    let description: String
+    let symbol: String
+    let type: String
     
+    static func == (lhs: SearchResult, rhs: SearchResult) -> Bool {
+        return lhs.description == rhs.description
+    }
 }
 
-struct QuoteHistory: Decodable {
-    let meta: MetaData?
-    let items: [String : HistoricData]
-    let error: String? // если что убрать
-}
 
-struct MetaData: Decodable {
-    let symbol: String?
-    let dataGranularity: String?
-}
-
-struct HistoricData: Decodable {
-    let date: String?
-    let open: Double?
-    let high: Double?
-    let low: Double?
-    let close: Double?
-}
 

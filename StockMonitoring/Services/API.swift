@@ -18,4 +18,13 @@ enum EndPoint: String {
     case trending = "/tr/trending"
     case news = "/ne/news/"
     case history = "/hi/history"
+    case collections = "/co/collections"
+    
+    case search = "/search"
 }
+
+struct ApiFinnhub {
+    static let scheme = "https"
+    static let host = "finnhub.io"
+}
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FavouriteStock" representedClassName="FavouriteStock" syncable="YES" codeGenerationType="class">
+        <attribute name="change" optional="YES" attributeType="Double" usesScalarValueType="NO"/>
+        <attribute name="changePercent" optional="YES" attributeType="Double" usesScalarValueType="NO"/>
+        <attribute name="isFavourite" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO"/>
+        <attribute name="nameCompany" optional="YES" attributeType="String"/>
+        <attribute name="price" optional="YES" attributeType="Double" usesScalarValueType="NO"/>
+        <attribute name="ticker" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="FavouriteStock" positionX="-63" positionY="-18" width="128" height="119"/>
+    </elements>
+</model>
