@@ -40,24 +40,16 @@ class InsetableTextField: UITextField {
         layer.masksToBounds = true
         layer.borderColor = CGColor(red: 9/255, green: 20/255, blue: 31/255, alpha: 1)
         
-        let image = UIImage(named: "Ellipse 434")
-        let paddingView = UIView(frame: CGRect(x: 8, y: 0, width: 15, height: 16))
-        let imageView = UIImageView (frame:CGRect(x: 0, y: 0, width: 15 , height: 16))
-
-        imageView.center = paddingView.center
-        imageView.image  = image
-        paddingView .addSubview(imageView)
-        leftView = paddingView
-        leftViewMode = .always
+        getSearchIcon()
         
         let paddingRightView = UIView(frame: CGRect(x: -5, y: 0, width: 16, height: 16))
         let clearButton = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 16, height: 16)))
-        clearButton.setImage(UIImage(named: "cross")!, for: UIControl.State.normal)
+        clearButton.setImage(UIImage(named: "cross"), for: UIControl.State.normal)
         clearButton.center = paddingRightView.center
         paddingRightView.addSubview(clearButton)
         rightView = paddingRightView
         clearButton.addTarget(self, action:#selector(clearClicked), for:.touchUpInside)
-        self.rightViewMode = .never
+        rightViewMode = .never
         
         self.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         self.addTarget(self, action: #selector(textFieldDidBeginEditing), for: .editingDidBegin)
@@ -80,10 +72,9 @@ class InsetableTextField: UITextField {
                 self.customDelegate?.textFieldDidChange(to: text, isChange: true)
         }
     
-        let image = UIImage(named: "Arrow")
         let paddingView = UIView(frame: CGRect(x: 8, y: 0, width: 20, height: 14))
         let returnButton = UIButton(frame: CGRect(origin: .zero, size: CGSize(width: 20, height: 14)))
-        returnButton.setImage(UIImage(named: "Arrow")!, for: UIControl.State.normal)
+        returnButton.setImage(UIImage(named: "Arrow"), for: UIControl.State.normal)
         returnButton.center = paddingView.center
         paddingView .addSubview(returnButton)
         leftView = paddingView
@@ -94,18 +85,12 @@ class InsetableTextField: UITextField {
     
     @objc func textFieldDidEndEditing() {
         self.placeholder = "Find company or ticker"
-        self.customDelegate?.textFieldDidChange(to: self.text!, isChange: false)
-        
-        if self.text == "" {
-        let image = UIImage(named: "Ellipse 434")
-        let paddingView = UIView(frame: CGRect(x: 8, y: 0, width: 15, height: 16))
-        let imageView = UIImageView (frame:CGRect(x: 0, y: 0, width: 15 , height: 16))
+      if let text = self.text {
+        self.customDelegate?.textFieldDidChange(to: text, isChange: false)
 
-        imageView.center = paddingView.center
-        imageView.image  = image
-        paddingView .addSubview(imageView)
-        leftView = paddingView
-        leftViewMode = .always
+      }        
+        if self.text == "" {
+            getSearchIcon()
         }
     }
     
@@ -120,15 +105,7 @@ class InsetableTextField: UITextField {
     @objc func returnClicked(sender: UIButton) {
         self.text = ""
         
-        let image = UIImage(named: "Ellipse 434")
-        let paddingView = UIView(frame: CGRect(x: 8, y: 0, width: 15, height: 16))
-        let imageView = UIImageView (frame:CGRect(x: 0, y: 0, width: 15 , height: 16))
-
-        imageView.center = paddingView.center
-        imageView.image  = image
-        paddingView .addSubview(imageView)
-        leftView = paddingView
-        leftViewMode = .always
+        getSearchIcon()
         self.endEditing(true)
         self.customDelegate?.textFieldDidChange(to: "", isChange: false)
 
@@ -163,4 +140,19 @@ class InsetableTextField: UITextField {
         rect.origin.x -= 12
         return rect
     }
+    
+    func getSearchIcon() {
+        let image = UIImage(named: "Ellipse 434")
+        let paddingView = UIView(frame: CGRect(x: 8, y: 0, width: 15, height: 16))
+        let imageView = UIImageView (frame:CGRect(x: 0, y: 0, width: 15 , height: 16))
+
+        imageView.center = paddingView.center
+        imageView.image  = image
+        paddingView .addSubview(imageView)
+        leftView = paddingView
+        leftViewMode = .always
+    }
 }
+
+
+

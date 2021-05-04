@@ -22,7 +22,6 @@ enum StockModel
     {
         enum RequestType {
             case getStocks(requestNeedsCancel: Bool)
-            case getStocksWithFavouriteAtrtibute
             case getFavouriteStocks
             case getSearch(request: String)
         }

@@ -26,18 +26,24 @@ class CardPresenter: CardPresentationLogic
   func Stock(response: Card.GetStock.Response)
   {
     let stock = response.stock
+    if stock.price != nil,
+       stock.change != nil,
+       stock.changePercent != nil,
+       stock.nameCompany != nil {
+      
+      let title = getAttributedString(string: String(stock.ticker), font: UIFont(name: "Montserrat-Bold", size: 18)!)
+      let shortName = getAttributedString(string: String(stock.nameCompany!), font: UIFont(name: "Montserrat-Bold", size: 12)!)
+      title.append(NSAttributedString(string: "\n"))
+      title.append(shortName)
+      let regularMarketPrice = Double(round(100*stock.price!)/100)
+      let regularMarketChange = Double(round(100*stock.change!)/100)
+      let regularMarketChangePercent = Double(round(100*stock.changePercent!)/100)
+      
+      let displayedStock = Card.GetStock.ViewModel.DisplayedStock(title: title, regularMarketPrice: regularMarketPrice, regularMarketChange: regularMarketChange, regularMarketChangePercent: regularMarketChangePercent, isFavourite: stock.isFavourite)
+      let viewModel = Card.GetStock.ViewModel(displayedStock: displayedStock)
+      viewController?.displayStock(viewModel: viewModel)
+    }
 
-    let title = getAttributedString(string: String(stock.ticker), font: UIFont(name: "Montserrat-Bold", size: 18)!)
-    let shortName = getAttributedString(string: String(stock.nameCompany!), font: UIFont(name: "Montserrat-Bold", size: 12)!)
-    title.append(NSAttributedString(string: "\n"))
-    title.append(shortName)
-    let regularMarketPrice = Double(round(100*stock.price!)/100)
-    let regularMarketChange = Double(round(100*stock.change!)/100)
-    let regularMarketChangePercent = Double(round(100*stock.changePercent!)/100)
-    
-    let displayedStock = Card.GetStock.ViewModel.DisplayedStock(title: title, regularMarketPrice: regularMarketPrice, regularMarketChange: regularMarketChange, regularMarketChangePercent: regularMarketChangePercent, isFavourite: stock.isFavourite)
-    let viewModel = Card.GetStock.ViewModel(displayedStock: displayedStock)
-    viewController?.displayStock(viewModel: viewModel)
   }
     
     func getAttributedString(string: String, font: UIFont) -> NSMutableAttributedString {

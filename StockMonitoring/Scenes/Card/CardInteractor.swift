@@ -59,7 +59,7 @@ class CardInteractor: CardBusinessLogic, CardDataStore
             
         } else {
             favouriteStocksCoreDataStore.createStock(stockToCreate: stock) { (stock: () throws -> Stock?) in
-                let stock = try! stock()!
+              guard let stock = try? stock() else { return }
                 self.stocks.append(stock)
                 self.stock.isFavourite = true
                 let response = Card.GetStock.Response(stock: self.stock)

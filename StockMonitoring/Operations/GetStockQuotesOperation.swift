@@ -21,9 +21,6 @@ class GetStockQuotesOperation: AsyncOperation {
     }
 
     var inputSymbols: String? {
-        // Определяем, задан ли у операции inputImage
-        // Если НЕТ, то анализируем dependencies,
-        // которые "подтверждают" протокол ImagePass
         var symbols: String?
         if let inputSymbols = _inputSymbols {
             symbols = inputSymbols
@@ -45,7 +42,6 @@ class GetStockQuotesOperation: AsyncOperation {
             }
             if self?.isCancelled == true { return }
             self?.outputFoundStocks = foundStocks
-//            print("self?.outputFoundStocks", self?.outputFoundStocks)
             self?.state = .finished
 
 

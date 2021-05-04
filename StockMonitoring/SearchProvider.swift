@@ -26,7 +26,6 @@ class SearchProvider {
         // Добавляем dependencies
         getStockQuotes.addDependency(search)
         output.addDependency(getStockQuotes)
-        print("qweqwe222211111222")
         operationQueue.addOperations(operations, waitUntilFinished: false)
     }
     
@@ -37,9 +36,9 @@ class SearchProvider {
   }
 
 extension SearchProvider: Hashable {
-    var hashValue: Int {
-        return (request).hashValue
-    }
+  func hash(into hasher: inout Hasher) {
+      hasher.combine(request)
+  }
 }
 
 func ==(lhs: SearchProvider, rhs: SearchProvider) -> Bool {

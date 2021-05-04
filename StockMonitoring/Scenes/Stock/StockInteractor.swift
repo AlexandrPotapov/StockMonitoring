@@ -14,480 +14,205 @@ import UIKit
 
 protocol StockBusinessLogic
 {
-    func makeRequest(request: StockModel.Model.Request.RequestType)
+  func makeRequest(request: StockModel.Model.Request.RequestType)
 }
 
 protocol StockDataStore
 {
-    
-    var stocks: [Stock] { get }
-    var favouriteStocks: [Stock] { get set } // если выбран сегмени фэворит передвать феворит
-    var favouriteStocksCoreDataStore: FavouriteStocksCoreDataStore! { get  }
-    var foundStocks: [Stock] { get }
-    var indexPath: Int! { get }
+  
+  var stocks: [Stock] { get }
+  var favouriteStocks: [Stock] { get set }
+  var favouriteStocksCoreDataStore: FavouriteStocksCoreDataStore! { get  }
+  var foundStocks: [Stock] { get }
+  var indexPath: Int! { get }
 }
 
 class StockInteractor: StockBusinessLogic, StockDataStore
 {
-    var indexPath: Int!
+  var indexPath: Int!
+  
+  var favouriteStocksCoreDataStore: FavouriteStocksCoreDataStore!
+  
+  var stocks = [Stock]()
+  var favouriteStocks = [Stock]()
+  var foundSymbols = [String]()
+  var foundStocks = [Stock]()
+  
+  var presenter: StockPresentationLogic?
+  var worker: StockWorker?
+  
+  
+  var searchProviders = Set<SearchProvider>()
+  private var operationQueue = OperationQueue ()
+  
+  
+  
+  private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
+  
+  // MARK: Do something
+  
+  func makeRequest(request: StockModel.Model.Request.RequestType)
+  {
+    if worker == nil {
+      worker = StockWorker()
+      worker?.doSomeWork()
+      
+    }
     
-    var favouriteStocksCoreDataStore: FavouriteStocksCoreDataStore!
+    favouriteStocksCoreDataStore = FavouriteStocksCoreDataStore.instance
     
-    var stocks = [Stock]()
-    var favouriteStocks = [Stock]()
-    var foundSymbols = [String]()
-    var foundStocks = [Stock]()
+    switch request {
     
-    var presenter: StockPresentationLogic?
-    var worker: StockWorker?
-    var listParam = "most_actives"
-    var startParam = 0
-    
-    var count = 0
-    
-    var searchProviders = Set<SearchProvider>()
-    private var operationQueue = OperationQueue ()
-
-
-    
-    private var fetcher: DataFetcher = NetworkDataFetcher(networking: NetworkService())
-    
-    // MARK: Do something
-    
-    func makeRequest(request: StockModel.Model.Request.RequestType)
-    {
-        if worker == nil {
-            worker = StockWorker()
-            worker?.doSomeWork()
-            
-        }
-        
-        favouriteStocksCoreDataStore = FavouriteStocksCoreDataStore.instance
-        
-        switch request {
-        
-        case .getStocks(let requestNeedsCancell) :
-            print(".getStocks")
-//            stocks.removeAll()
-            guard requestNeedsCancell == false else {
-                operationQueue.cancelAllOperations()
-                self.presenter?.presentData(response: .hideActivityIndicator)
-//                stocks.removeAll()
-                return
-            }
-            if stocks.isEmpty {
-                print("stocks.isEmpty")
-
-                let operation = GetStockOperation { (stocks) in
-                    guard let stocks = stocks else { return }
-                    self.stocks = stocks
-                    OperationQueue.main.addOperation {
-                        self.presenter?.presentData(response: .hideActivityIndicator)
-                        self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ))
-                    }
-//                    self.fetcher.getCollectionsResponse(list: self.listParam, start: String(self.startParam)) { [ weak self ] (stockCollections) in
-//                        guard let stockCollections = stockCollections else { return }
-//                        for stock in stockCollections.quotes {
-//                            self?.stocks.append(Stock(ticker: stock.symbol!, nameCompany: stock.shortName!, price: stock.regularMarketPrice!, change: stock.regularMarketChange!, changePercent: stock.regularMarketChangePercent!, isFavourite: false))
-//
-//                        }
-
-                    if !self.favouriteStocks.isEmpty {
-                                print("!self!.favouriteStocks.isEmpty")
-                        for (i, value) in self.stocks.enumerated() {
-                            for (x, stock) in self.favouriteStocks.enumerated() {
-                                        if stock.ticker == value.ticker {
-                                            self.stocks[i].isFavourite = true
-                                            self.favouriteStocks[x] = (self.stocks[i])
-                                        }
-                                    }
-                                }
-                                OperationQueue.main.addOperation {
-                                    self.presenter?.presentData(response: .hideActivityIndicator)
-                                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ?? [Stock]()))
-                                }
-
-                            } else {
-                                print("elseelse!self!.favouriteStocks.isEmptyelseelse")
-
-                                self.favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
-                                    do {
-                                        self.favouriteStocks = try stocks()
-                    //                    self.stocks = self.favouriteStocks
-                                        if !(self.favouriteStocks.isEmpty) {
-                                            for (i, value) in self.stocks.enumerated() {
-                                                for (x, stock) in self.favouriteStocks.enumerated() {
-                                                    if stock.ticker == value.ticker {
-                                                        self.stocks[i].isFavourite = true
-                                                        self.favouriteStocksCoreDataStore.updateStock(stockToUpdate: (self.stocks[i]), completionHandler: {_ in
-                                                        })
-
-                                                    }
-                                                }
-                                            }
-                                            OperationQueue.main.addOperation {
-                                                self.presenter?.presentData(response: .hideActivityIndicator)
-                                                self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ?? [Stock]()))
-                                            }
-                                        } else {
-                                            OperationQueue.main.addOperation {
-                                                self.presenter?.presentData(response: .hideActivityIndicator)
-                                                self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ?? [Stock]()))
-                                            }
-                                        }
-                                    } catch {}
-
-
-
-                            }
-                            }
-//                }
-//            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ))
-//            fetcher.getCollectionsResponse(list: listParam, start: String(startParam)) { [ weak self ] (stockCollections) in
-//                guard let stockCollections = stockCollections else { return }
-//                for stock in stockCollections.quotes {
-//                    self?.stocks.append(Stock(ticker: stock.symbol!, nameCompany: stock.shortName!, price: stock.regularMarketPrice!, change: stock.regularMarketChange!, changePercent: stock.regularMarketChangePercent!, isFavourite: false))
-//
-//                }
-//
-//                    if !self!.favouriteStocks.isEmpty {
-//                        print("!self!.favouriteStocks.isEmpty")
-//                        for (i, value) in self!.stocks.enumerated() {
-//                            for (x, stock) in self!.favouriteStocks.enumerated() {
-//                                if stock.ticker == value.ticker {
-//                                    self!.stocks[i].isFavourite = true
-//                                    self!.favouriteStocks[x] = (self?.stocks[i])!
-//                                }
-//                            }
-//                        }
-//                        self?.presenter?.presentData(response: .hideActivityIndicator)
-//                        self?.presenter?.presentData(response: .presentStocks(stocksResponse: self?.stocks ?? [Stock]()))
-//                    } else {
-//                        print("elseelse!self!.favouriteStocks.isEmptyelseelse")
-//
-//                        self?.favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
-//                            do {
-//                                self?.favouriteStocks = try stocks()
-//            //                    self.stocks = self.favouriteStocks
-//                                if !(self?.favouriteStocks.isEmpty)! {
-//                                    for (i, value) in self!.stocks.enumerated() {
-//                                        for (x, stock) in self!.favouriteStocks.enumerated() {
-//                                            if stock.ticker == value.ticker {
-//                                                self?.stocks[i].isFavourite = true
-//                                                self?.favouriteStocksCoreDataStore.updateStock(stockToUpdate: (self?.stocks[i])!, completionHandler: {_ in
-//                                                })
-//
-//                                            }
-//                                        }
-//                                    }
-//                                    self?.presenter?.presentData(response: .hideActivityIndicator)
-//                                    self?.presenter?.presentData(response: .presentStocks(stocksResponse: self!.stocks))
-//                                } else {
-//                                    self?.presenter?.presentData(response: .hideActivityIndicator)
-//                                    self?.presenter?.presentData(response: .presentStocks(stocksResponse: self!.stocks))
-//                                }
-//                            } catch {}
-//
-//
-//
-//                    }
-//                    }
+    case .getStocks(let requestNeedsCancell) :
+      guard requestNeedsCancell == false else {
+        operationQueue.cancelAllOperations()
+        self.presenter?.presentData(response: .hideActivityIndicator)
+        return
+      }
+      if stocks.isEmpty {
+        let operation = GetStockOperation { (stocks) in
+          guard let stocks = stocks else { return }
+          self.stocks = stocks
+          OperationQueue.main.addOperation {
+            self.presenter?.presentData(response: .hideActivityIndicator)
+            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ))
+          }
+          if !self.favouriteStocks.isEmpty {
+            for (i, value) in self.stocks.enumerated() {
+              for (x, stock) in self.favouriteStocks.enumerated() {
+                if stock.ticker == value.ticker {
+                  self.stocks[i].isFavourite = true
+                  self.favouriteStocks[x] = (self.stocks[i])
                 }
-
-
-                operationQueue.addOperation(operation)
-            } else {
-                print("stocks.notEmpty")
-                if !self.favouriteStocks.isEmpty {
-                    for (i, value) in self.stocks.enumerated() {
-                        self.stocks[i].isFavourite = false
-                        for stock in self.favouriteStocks {
-                            if stock.ticker == value.ticker {
-                                self.stocks[i].isFavourite = true
-
-                            }
-                        }
-                    }
-                    print("stocks.notEmpty",323232)
-                    self.presenter?.presentData(response: .hideActivityIndicator)
-                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
-                } else {
-                    for (i, _) in self.stocks.enumerated() {
-                        self.stocks[i].isFavourite = false
-                    }
-                    self.presenter?.presentData(response: .hideActivityIndicator)
-                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
-                }
+              }
             }
-
-//
-        case .getStocksWithFavouriteAtrtibute: // !!!!!!! удалить
-            print(".getStocksWithFavouriteAtrtibute")
-            
-        case .getFavouriteStocks:
-            print(".getFavouriteStocks")
-            favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
-                do {
-                    self.favouriteStocks = try stocks()
-//                    self.stocks = self.favouriteStocks
-                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.favouriteStocks))
-                } catch {}
+            OperationQueue.main.addOperation {
+              self.presenter?.presentData(response: .hideActivityIndicator)
+              self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ))
             }
             
-        case .getSearch(let request): // показывет старые результаты поиска иногда не сразу находит яблоко // содать операцию и при новом запросе отменят старые
-            print("getSearch")
-            for provider in searchProviders {
-                provider.cancel()
-            }
-            searchProviders.removeAll()
-            if request == "" {
-                self.presenter?.presentData(response: .hideActivityIndicator)
-            }
-            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+          } else {
             
-
-//            guard request != "" else { return }
-            print("searchProviders.count",searchProviders.count)
-
-            count += 1
-            print("count: \(count)")
-
-            guard request != "" else {
-                print(123)
-                if !self.favouriteStocks.isEmpty {
-                    print(432)
-
-                    for (i, value) in self.foundStocks.enumerated() {
-                        self.foundStocks[i].isFavourite = false
-                        for stock in self.favouriteStocks {
-                            if stock.ticker == value.ticker {
-                                self.foundStocks[i].isFavourite = true
-                            }
-                        }
-                    }
-                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-                } else {
-                    print(654)
-
-                    for i in self.foundStocks.indices {
-                        self.foundStocks[i].isFavourite = false
-                }
-                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-                }
-                self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-                return
-            }
-
-            let searchProvider = SearchProvider(request: request) { (foundStock) in
-                guard let foundStocks = foundStock else { return }
-                self.foundStocks = foundStocks
-//                OperationQueue.main.addOperation {
-//                    self.presenter?.presentData(response: .hideActivityIndicator)
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-//                }
-            
-
-            
-               
-                                if !self.favouriteStocks.isEmpty {
-                                    for (i, value) in self.foundStocks.enumerated() {
-                                        self.foundStocks[i].isFavourite = false
-                                        for stock in self.favouriteStocks {
-                                            if stock.ticker == value.ticker {
-                                                self.foundStocks[i].isFavourite = true
-                                                self.favouriteStocksCoreDataStore.updateStock(stockToUpdate: self.foundStocks[i]) { _ in
-                                                }
-                                            }
-                                        }
-                                    }
-                                    OperationQueue.main.addOperation {
-                                        self.presenter?.presentData(response: .hideActivityIndicator)
-                                        self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-                                    }
-                                } else {
-                                    OperationQueue.main.addOperation {
-                                        self.presenter?.presentData(response: .hideActivityIndicator)
-                                        self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-                                    }
-                                }
-
-                            
+            self.favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
+              do {
+                self.favouriteStocks = try stocks()
+                if !(self.favouriteStocks.isEmpty) {
+                  for (i, value) in self.stocks.enumerated() {
+                    for stock in self.favouriteStocks {
+                      if stock.ticker == value.ticker {
+                        self.stocks[i].isFavourite = true
+                        self.favouriteStocksCoreDataStore.updateStock(stockToUpdate: (self.stocks[i]), completionHandler: {_ in
+                        })
                         
-                
+                      }
+                    }
+                  }
+                  
+                  OperationQueue.main.addOperation {
+                    self.presenter?.presentData(response: .hideActivityIndicator)
+                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
+                  }
+                } else {
+                  OperationQueue.main.addOperation {
+                    self.presenter?.presentData(response: .hideActivityIndicator)
+                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
+                  }
+                }
+              } catch {}
             }
-            searchProviders.insert(searchProvider)
-
-        
-//        // !!!!!!!!!! может надо на мейнкью увести self?.presenter?.presentData(response: .presentStocks !!!!!!
-//        case .getStocks:
-//            print(".getStocks")
-////            stocks.removeAll()
-//            if stocks.isEmpty {
-//                print("stocks.isEmpty")
-//            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks ))
-//            fetcher.getCollectionsResponse(list: listParam, start: String(startParam)) { [ weak self ] (stockCollections) in
-//                guard let stockCollections = stockCollections else { return }
-//                for stock in stockCollections.quotes {
-//                    self?.stocks.append(Stock(ticker: stock.symbol!, nameCompany: stock.shortName!, price: stock.regularMarketPrice!, change: stock.regularMarketChange!, changePercent: stock.regularMarketChangePercent!, isFavourite: false))
-//
-//                }
-//
-//                    if !self!.favouriteStocks.isEmpty {
-//                        print("!self!.favouriteStocks.isEmpty")
-//                        for (i, value) in self!.stocks.enumerated() {
-//                            for (x, stock) in self!.favouriteStocks.enumerated() {
-//                                if stock.ticker == value.ticker {
-//                                    self!.stocks[i].isFavourite = true
-//                                    self!.favouriteStocks[x] = (self?.stocks[i])!
-//                                }
-//                            }
-//                        }
-//                        self?.presenter?.presentData(response: .hideActivityIndicator)
-//                        self?.presenter?.presentData(response: .presentStocks(stocksResponse: self?.stocks ?? [Stock]()))
-//                    } else {
-//                        print("elseelse!self!.favouriteStocks.isEmptyelseelse")
-//
-//                        self?.favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
-//                            do {
-//                                self?.favouriteStocks = try stocks()
-//            //                    self.stocks = self.favouriteStocks
-//                                if !(self?.favouriteStocks.isEmpty)! {
-//                                    for (i, value) in self!.stocks.enumerated() {
-//                                        for (x, stock) in self!.favouriteStocks.enumerated() {
-//                                            if stock.ticker == value.ticker {
-//                                                self?.stocks[i].isFavourite = true
-//                                                self?.favouriteStocksCoreDataStore.updateStock(stockToUpdate: (self?.stocks[i])!, completionHandler: {_ in
-//                                                })
-//
-//                                            }
-//                                        }
-//                                    }
-//                                    self?.presenter?.presentData(response: .hideActivityIndicator)
-//                                    self?.presenter?.presentData(response: .presentStocks(stocksResponse: self!.stocks))
-//                                } else {
-//                                    self?.presenter?.presentData(response: .hideActivityIndicator)
-//                                    self?.presenter?.presentData(response: .presentStocks(stocksResponse: self!.stocks))
-//                                }
-//                            } catch {}
-//
-//
-//
-//                    }
-//                    }
-//
-//
-//
-//                        }
-//            } else {
-//                print("stocks.notEmpty")
-//                if !self.favouriteStocks.isEmpty {
-//                    for (i, value) in self.stocks.enumerated() {
-//                        self.stocks[i].isFavourite = false
-//                        for stock in self.favouriteStocks {
-//                            if stock.ticker == value.ticker {
-//                                self.stocks[i].isFavourite = true
-//
-//                            }
-//                        }
-//                    }
-//                    print("stocks.notEmpty",323232)
-//                    self.presenter?.presentData(response: .hideActivityIndicator)
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
-//                } else {
-//                    for (i, _) in self.stocks.enumerated() {
-//                        self.stocks[i].isFavourite = false
-//                    }
-//                    self.presenter?.presentData(response: .hideActivityIndicator)
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
-//                }
-//            }
-//
-//
-//        case .getStocksWithFavouriteAtrtibute: // !!!!!!! удалить
-//            print(".getStocksWithFavouriteAtrtibute")
-//
-//        case .getFavouriteStocks:
-//            print(".getFavouriteStocks")
-//            favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
-//                do {
-//                    self.favouriteStocks = try stocks()
-////                    self.stocks = self.favouriteStocks
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.favouriteStocks))
-//                } catch {}
-//            }
-//
-//        case .getSearch(let request): // показывет старые результаты поиска иногда не сразу находит яблоко // содать операцию и при новом запросе отменят старые
-//            print("getSearch")
-//            self.presenter?.presentData(response: .presentStocks(stocksResponse: [Stock]() ))
-//
-//            guard request != "" else {
-//                print(123)
-//                if !self.favouriteStocks.isEmpty {
-//                    print(432)
-//
-//                    for (i, value) in self.foundStocks.enumerated() {
-//                        for stock in self.favouriteStocks {
-//                            if stock.ticker == value.ticker {
-//                                self.foundStocks[i].isFavourite = true
-//                            } else {
-//                                self.foundStocks[i].isFavourite = false
-//                            }
-//                        }
-//                    }
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-//                } else {
-//                    print(654)
-//
-//                    for i in self.foundStocks.indices {
-//                        self.foundStocks[i].isFavourite = false
-//                }
-//                    self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-//                }
-//                self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
-//                return
-//            }
-//            self.foundSymbols.removeAll()
-//
-//
-//            fetcher.getSearchResponse(value: request) { [ weak self ] (searchResult) in
-//                guard let searchResult = searchResult else { return }
-//                self?.foundSymbols.removeAll()
-//                var array = [String]()
-//                for value in searchResult.result {
-//                    if value.type == "Common Stock" && !value.symbol.contains(".") {
-//                        array.append(value.symbol)
-//                        self?.foundSymbols.append(value.symbol)
-//                            }
-//                        }
-//                            let stringRequest = array.joined(separator:",")
-//                        if stringRequest != "" {
-//                            print(8888,stringRequest, 88888)
-//                            self?.fetcher.getQuoteResponse(value: stringRequest) { (stocks) in
-//                                guard let stocks = stocks else { return }
-//                                var foundStocks = [Stock]()
-//                                for stock in stocks {
-//                                    foundStocks.append(Stock(ticker: stock.symbol!, nameCompany: stock.shortName, price: stock.regularMarketPrice, change: stock.regularMarketChange, changePercent: stock.regularMarketChangePercent, isFavourite: false))
-//                                }
-//                                self?.foundStocks = foundStocks
-//                                if !self!.favouriteStocks.isEmpty {
-//                                    for (i, value) in self!.foundStocks.enumerated() {
-//                                        for (x, stock) in self!.favouriteStocks.enumerated() {
-//                                            if stock.ticker == value.ticker {
-//                                                self!.foundStocks[i].isFavourite = true
-//                                                self?.favouriteStocksCoreDataStore.updateStock(stockToUpdate: self!.foundStocks[i]) { _ in
-//                                                }
-//                                            }
-//                                        }
-//                                    }
-//                                }
-//                                print(self!.foundStocks, 555)
-//                                self?.presenter?.presentData(response: .hideActivityIndicator)
-//                                self?.presenter?.presentData(response: .presentStocks(stocksResponse: self!.foundStocks ))
-//                            }
-//                        }
-//                }
-            }
-
+          }
         }
-
+        
+        
+        operationQueue.addOperation(operation)
+      } else {
+        if !self.favouriteStocks.isEmpty {
+          for (i, value) in self.stocks.enumerated() {
+            self.stocks[i].isFavourite = false
+            for stock in self.favouriteStocks {
+              if stock.ticker == value.ticker {
+                self.stocks[i].isFavourite = true
+                
+              }
+            }
+          }
+          self.presenter?.presentData(response: .hideActivityIndicator)
+          self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
+        } else {
+          for (i, _) in self.stocks.enumerated() {
+            self.stocks[i].isFavourite = false
+          }
+          self.presenter?.presentData(response: .hideActivityIndicator)
+          self.presenter?.presentData(response: .presentStocks(stocksResponse: self.stocks))
+        }
+      }
+      
+      
+    case .getFavouriteStocks:
+      favouriteStocksCoreDataStore.fetchStocks { (stocks: () throws -> [Stock]) in
+        do {
+          self.favouriteStocks = try stocks()
+          self.presenter?.presentData(response: .presentStocks(stocksResponse: self.favouriteStocks))
+        } catch {}
+      }
+      
+    case .getSearch(let request):
+      for provider in searchProviders {
+        provider.cancel()
+      }
+      searchProviders.removeAll()
+      if request == "" {
+        self.presenter?.presentData(response: .hideActivityIndicator)
+      }
+      self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+      
+      guard request != "" else {
+        if !self.favouriteStocks.isEmpty {
+          for (i, value) in self.foundStocks.enumerated() {
+            self.foundStocks[i].isFavourite = false
+            for stock in self.favouriteStocks {
+              if stock.ticker == value.ticker {
+                self.foundStocks[i].isFavourite = true
+              }
+            }
+          }
+          self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+        } else {
+          for i in self.foundStocks.indices {
+            self.foundStocks[i].isFavourite = false
+          }
+          self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+        }
+        self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+        return
+      }
+      
+      let searchProvider = SearchProvider(request: request) { (foundStock) in
+        guard let foundStocks = foundStock else { return }
+        self.foundStocks = foundStocks
+        if !self.favouriteStocks.isEmpty {
+          for (i, value) in self.foundStocks.enumerated() {
+            self.foundStocks[i].isFavourite = false
+            for stock in self.favouriteStocks {
+              if stock.ticker == value.ticker {
+                self.foundStocks[i].isFavourite = true
+                self.favouriteStocksCoreDataStore.updateStock(stockToUpdate: self.foundStocks[i]) { _ in
+                }
+              }
+            }
+          }
+          OperationQueue.main.addOperation {
+            self.presenter?.presentData(response: .hideActivityIndicator)
+            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+          }
+        } else {
+          OperationQueue.main.addOperation {
+            self.presenter?.presentData(response: .hideActivityIndicator)
+            self.presenter?.presentData(response: .presentStocks(stocksResponse: self.foundStocks ))
+          }
+        }
+      }
+      searchProviders.insert(searchProvider)
+    }
+  }
 }

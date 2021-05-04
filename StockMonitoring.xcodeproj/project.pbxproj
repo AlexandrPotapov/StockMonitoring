@@ -35,7 +35,6 @@
 		1F6EBD2D2626DA21008D5D1F /* TitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EBD2C2626DA21008D5D1F /* TitleView.swift */; };
 		1F6EBD33262710CC008D5D1F /* InertableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6EBD32262710CC008D5D1F /* InertableTextField.swift */; };
 		1F77492D263D971A002C9BB3 /* GetStockOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F77492C263D971A002C9BB3 /* GetStockOperation.swift */; };
-		1F86AF42263B0E51004C95FE /* SearchOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F86AF41263B0E51004C95FE /* SearchOperations.swift */; };
 		1F88CD54263C315B002CD912 /* AsyncOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD53263C315B002CD912 /* AsyncOperation.swift */; };
 		1F88CD57263C318E002CD912 /* SearchOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD56263C318E002CD912 /* SearchOperation.swift */; };
 		1F88CD5A263C31A1002CD912 /* GetStockQuotesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F88CD59263C31A1002CD912 /* GetStockQuotesOperation.swift */; };
@@ -77,7 +76,6 @@
 		1F6EBD2C2626DA21008D5D1F /* TitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleView.swift; sourceTree = "<group>"; };
 		1F6EBD32262710CC008D5D1F /* InertableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InertableTextField.swift; sourceTree = "<group>"; };
 		1F77492C263D971A002C9BB3 /* GetStockOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStockOperation.swift; sourceTree = "<group>"; };
-		1F86AF41263B0E51004C95FE /* SearchOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOperations.swift; sourceTree = "<group>"; };
 		1F88CD53263C315B002CD912 /* AsyncOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncOperation.swift; sourceTree = "<group>"; };
 		1F88CD56263C318E002CD912 /* SearchOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOperation.swift; sourceTree = "<group>"; };
 		1F88CD59263C31A1002CD912 /* GetStockQuotesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStockQuotesOperation.swift; sourceTree = "<group>"; };
@@ -139,7 +137,6 @@
 		1F4F74472613684F0020E16E /* Stock */ = {
 			isa = PBXGroup;
 			children = (
-				1F158EF5262979E5007119E5 /* StocksSegmentedControl.swift */,
 				1F4F74482613687C0020E16E /* StockPresenter.swift */,
 				1F4F74492613687C0020E16E /* StockWorker.swift */,
 				1F4F744A2613687C0020E16E /* StockRouter.swift */,
@@ -157,6 +154,15 @@
 				1F4FC70B2612217C00FB6CD6 /* StocksCell.xib */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		1F56913526412F760081C013 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				1F158EF5262979E5007119E5 /* StocksSegmentedControl.swift */,
+				1F6EBD2F2626DA2B008D5D1F /* TitleView */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		1F6EBC5726289D2100EE52A0 /* Font */ = {
@@ -221,7 +227,7 @@
 				1F88CD5C263C4053002CD912 /* SearchProvider.swift */,
 				1F88CD52263C3132002CD912 /* Operations */,
 				1F4FC707261220CA00FB6CD6 /* Cell */,
-				1F6EBD2F2626DA2B008D5D1F /* TitleView */,
+				1F56913526412F760081C013 /* Views */,
 				1F6EBC5726289D2100EE52A0 /* Font */,
 				1FBD48812633296A00E9EE62 /* Scenes */,
 				1F4F39F0260F981400BDB399 /* Model */,
@@ -233,7 +239,6 @@
 				1FD1DFDE260E5BED001A7125 /* Assets.xcassets */,
 				1FD1DFE0260E5BED001A7125 /* LaunchScreen.storyboard */,
 				1FD1DFE3260E5BED001A7125 /* Info.plist */,
-				1F86AF41263B0E51004C95FE /* SearchOperations.swift */,
 			);
 			path = StockMonitoring;
 			sourceTree = "<group>";
@@ -338,7 +343,6 @@
 				1F4F39ED260F980E00BDB399 /* Stock.swift in Sources */,
 				1F4E0057262C4E29007B2E3D /* CardRouter.swift in Sources */,
 				1F6EBD2D2626DA21008D5D1F /* TitleView.swift in Sources */,
-				1F86AF42263B0E51004C95FE /* SearchOperations.swift in Sources */,
 				1F88CD57263C318E002CD912 /* SearchOperation.swift in Sources */,
 				1F4E0055262C4E29007B2E3D /* CardPresenter.swift in Sources */,
 				1F4E0049262C49BE007B2E3D /* StockMonitoring.xcdatamodeld in Sources */,

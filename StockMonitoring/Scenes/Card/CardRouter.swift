@@ -60,6 +60,5 @@ class CardRouter: NSObject, CardRoutingLogic, CardDataPassing
         destination.favouriteStocks.append(source.stock)
 
     }
-    print("source.stock", source.stock, "source.stock")
   }
 }

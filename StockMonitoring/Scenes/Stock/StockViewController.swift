@@ -44,12 +44,9 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
     var stocksIsSelect = true
     var favouriteIsSelect = false
     var searchIsSelect = false
+  var searchProviders = Set<SearchProvider>()
+  
     private var pickedStocksSegment = true
-    
-//    var textFieldValue = ""
-    
-    
-//    private var favouriteStocks = [FavouriteStock]()
     private var offSetNavBar = CGFloat(0.0)
     private var titleView = TitleView()
     private var lastContentOffset: CGFloat = 0
@@ -59,8 +56,6 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
     private var favouriteTablePresented = false
     private var searchTablePresented = false
     
-    var searchProviders = Set<SearchProvider>()
-
     
     // MARK: Object lifecycle
     
@@ -114,16 +109,11 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
         stockActivityIndicator.startAnimating()
         stockActivityIndicator.isHidden = false
         stockTablePresented = true
-//        getStocks()
-//        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(self.textFieldDidChange))
-//        tapGestureRecognizer2.numberOfTapsRequired = 1
-//        titleView.subviews.first?.addGestureRecognizer(tapGestureRecognizer2)
 
         searchHeader.isHidden = true
         topPadding36.isHidden = true
 
         titleView.myTextField.customDelegate = self
-//        titleView.myTextField.
         stockSegmentedControl.delegate = self
         
         let stockCell = UINib(nibName: "StocksCell", bundle: nil)
@@ -142,9 +132,6 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
         for view : UIView in (navigationController?.navigationBar.subviews)! {
           view.clipsToBounds = false
         }
-        print("viewWillAppear", searchTablePresented)
-        
-        // ??
         if searchTablePresented == true {
             getSearch(request: "")
         }
@@ -152,50 +139,24 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
         if stockTablePresented == true {
             getStocks(requestNeedsCancel: false)
         } else if favouriteTablePresented == true {
-//            getStocks(requestNeedsCancel: true)
             getFavouriteStocks()
         }
         }
 
-//        if pickedStocksSegment {
-//            print("pickedStocksSegment")
-//            getStocks()
-////                    interactor?.makeRequest(request: .getStocksWithFavouriteAtrtibute)
-//
-//        } else {
-//            favouriteIsSelect = true
-//            stocksIsSelect = false
-//            searchIsSelect = false
-//            getFavouriteStocks()
-        
-        print("stockTablePresented = ", stockTablePresented)
-        print("favouriteTablePresented = ", favouriteTablePresented)
-        print("searchTablePresented = ", searchTablePresented)
-        print("favouriteIsSelect = ", favouriteIsSelect)
-        print("stocksIsSelect = ", stocksIsSelect)
-        print("searchIsSelect = ", searchIsSelect)
-        
-//        }
-
         navigationController?.navigationBar.transform = .init(translationX: 0, y: -offSetNavBar)
         navigationItem.titleView?.layoutIfNeeded()
         self.navigationController?.isNavigationBarHidden = false
-//        interactor?.makeRequest(request: .getStocksWithFavouriteAtrtibute)
-//        stockTableView.reloadData()
+
       }
 
     
     // MARK: Do something
         
-    func getStocks(requestNeedsCancel: Bool)
-    {
-        
-//        stockTablePresented = true
-        
+    func getStocks(requestNeedsCancel: Bool) {
+                
         favouriteIsSelect = false
         stocksIsSelect = true
         searchIsSelect = false
-//        stockActivityIndicator.isHidden = false
         interactor?.makeRequest(request: .getStocks(requestNeedsCancel: requestNeedsCancel) )
     }
     
@@ -235,63 +196,42 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
             getStocks(requestNeedsCancel: true)
 
             getFavouriteStocks()
-//            getStocks(requestNeedsCancel: true)
             pickedStocksSegment = false
             
             stockTablePresented = false
             favouriteTablePresented = true
             searchTablePresented = false
-//            getStocks(requestNeedsCancel: true)
         } else {
             pickedStocksSegment = true
             stockTablePresented = true
             favouriteTablePresented = false
             searchTablePresented = false
+          
             stockActivityIndicator.isHidden = false
             getStocks(requestNeedsCancel: false)
-            
-            // запихать в операции и отменять при изменении сегмента
         }
     }
 
     func textFieldDidChange(to value: String, isChange: Bool) {
         if isChange {
-            print("textFieldDidChange")
-            print(value, 12e232)
-//            textFieldValue = value
             if value != "" {
                 stockSegmentedControl.isHidden = true
                 topPadding40.isHidden = true
                 searchHeader.isHidden = false
                 topPadding36.isHidden = false
                 getSearch(request: value)
-                
-//                stockTablePresented = false
-//                favouriteTablePresented = false
-                searchTablePresented = true
-                
-                print("searchTablePresented2222", searchTablePresented)
 
+                searchTablePresented = true
             }
-        } else  {
-                        print("textFieldEndChange", value)
+        } else {
                         if value == "" {
-                            print("value == ", value)
                             searchTablePresented = false
-                            
                             getSearch(request: value)
 
                         stockSegmentedControl.isHidden = false
                             topPadding40.isHidden = false
                             searchHeader.isHidden = true
                             topPadding36.isHidden = true
-//                            getStocks() // не обновлять если не происходило ввода текста
-                            // попробывать установить обсерверы на левый вью текстфилда
-                            // скрыть сегментконтрол и добавить сабвью лейбл сток а потом удалить его
-                            // обновлять данные коредаты новыми из инета
-            
-//                            stockTablePresented = false
-//                            favouriteTablePresented = true
                             searchTablePresented = false
                             searchIsSelect = false
                             
@@ -316,9 +256,6 @@ class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedC
     @objc func didTapView(){
         self.navigationItem.titleView?.endEditing(true)
     }
-//    @objc func textFieldDidChange() {
-//        print("textFieldDidChange")
-//    }
 }
 
 //MARK: Table Delegate/DataSource
@@ -386,7 +323,6 @@ extension StockViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 navigationController?.navigationBar.transform = .init(translationX: 0, y: -offSet2)
 
-//                stockSegmentedControl.transform = .init(translationX: 0, y: -offSet)
             stackView.transform = .init(translationX: 0, y: -offSet)
                 stockTableView.transform = .init(translationX: 0, y: -offSet)
 
@@ -407,7 +343,6 @@ extension StockViewController: UITableViewDelegate, UITableViewDataSource {
                     offSet = 56
                 }
                 navigationController?.navigationBar.transform = .init(translationX: 0, y: -offSet2)
-//                stockSegmentedControl.transform = .init(translationX: 0, y: -offSet)
             stackView.transform = .init(translationX: 0, y: -offSet)
 
                 stockTableView.transform = .init(translationX: 0, y: -offSet)
@@ -421,227 +356,3 @@ extension StockViewController: UITableViewDelegate, UITableViewDataSource {
         offSetNavBar = offSet2
     }
 }
-
-
-
-// MARK: 123
-
-//
-//  StockViewController.swift
-//  StockMonitoring
-//
-//  Created by Александр on 30.03.2021.
-//  Copyright (c) 2021 ___ORGANIZATIONNAME___. All rights reserved.
-//
-//  This file was generated by the Clean Swift Xcode Templates so
-//  you can apply clean architecture to your iOS and Mac projects,
-//  see http://clean-swift.com
-//
-
-//import UIKit
-//
-//protocol StockDisplayLogic: class
-//{
-//    func displayData(viewModel: StockModel.Model.ViewModel.ViewModelData)
-//}
-//
-//class StockViewController: UIViewController, StockDisplayLogic, StocksSegmentedControlDelegate, TextFieldDidChange
-//{
-//
-//
-//
-//
-//
-//
-//
-//    @IBOutlet weak var stockActivityIndicator: UIActivityIndicatorView!
-//    @IBOutlet weak var stockSegmentedControl: StocksSegmentedControl! {
-//        didSet{
-//            stockSegmentedControl.setButtonTitles(buttonTitles: ["Stocks","Favourite"])
-//            stockSegmentedControl.selectorTextColor = UIColor(red: 2/255, green: 2/255, blue: 2/255, alpha: 1)
-//        }
-//    }
-//    @IBOutlet weak var stockTableView: UITableView!
-//
-//    var interactor: StockBusinessLogic?
-//    var router: (NSObjectProtocol & StockRoutingLogic & StockDataPassing)?
-//    var pickedStocksSegment = true
-//    var textFieldValue = ""
-//
-//    private var favouriteStocks = [FavouriteStock]()
-//    private var offSetNavBar = CGFloat(0.0)
-//    private var titleView = TitleView()
-//    private var lastContentOffset: CGFloat = 0
-//    private var stockViewModel = StockViewModel.init(cells: [])
-//
-//    // MARK: Object lifecycle
-//
-//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
-//    {
-//        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-//        setup()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder)
-//    {
-//        super.init(coder: aDecoder)
-//        setup()
-//    }
-//
-//    // MARK: Setup
-//
-//    private func setup()
-//    {
-//        let viewController = self
-//        let interactor = StockInteractor()
-//        let presenter = StockPresenter()
-//        let router = StockRouter()
-//        viewController.interactor = interactor
-//        viewController.router = router
-//        interactor.presenter = presenter
-//        presenter.viewController = viewController
-//        router.viewController = viewController
-//        router.dataStore = interactor
-//
-//    }
-//
-//    // MARK: Routing
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
-//    {
-//        if let scene = segue.identifier {
-//            let selector = NSSelectorFromString("routeTo\(scene)WithSegue:")
-//            if let router = router, router.responds(to: selector) {
-//                router.perform(selector, with: segue)
-//            }
-//        }
-//    }
-//
-//    // MARK: View lifecycle
-//
-//    override func viewDidLoad()
-//    {
-//        super.viewDidLoad()
-////        let tapGestureRecognizer2 = UITapGestureRecognizer(target: self, action: #selector(self.textFieldDidChange))
-////        tapGestureRecognizer2.numberOfTapsRequired = 1
-////        titleView.subviews.first?.addGestureRecognizer(tapGestureRecognizer2)
-//
-//
-//        titleView.myTextField.customDelegate = self
-//        stockSegmentedControl.delegate = self
-//        let stockCell = UINib(nibName: "StocksCell", bundle: nil)
-//        stockTableView.register(stockCell , forCellReuseIdentifier: StocksCell.reuseId)
-//        setupTopBars()
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.didTapView))
-//        tapGestureRecognizer.numberOfTapsRequired = 1
-//        tapGestureRecognizer.cancelsTouchesInView = false
-//        view.addGestureRecognizer(tapGestureRecognizer)
-//
-//
-//    }
-//
-//
-//      override func viewWillAppear(_ animated: Bool) {
-//        for view : UIView in (navigationController?.navigationBar.subviews)! {
-//          view.clipsToBounds = false
-//        }
-//        if pickedStocksSegment {
-//            stockActivityIndicator.startAnimating()
-//            stockActivityIndicator.isHidden = false
-//
-//            getStocks()
-//                    interactor?.makeRequest(request: .getStocksWithFavouriteAtrtibute)
-//
-//        } else {
-//            getFavouriteStocks()
-//        }
-//
-//        navigationController?.navigationBar.transform = .init(translationX: 0, y: -offSetNavBar)
-//        navigationItem.titleView?.layoutIfNeeded()
-//        self.navigationController?.isNavigationBarHidden = false
-////        interactor?.makeRequest(request: .getStocksWithFavouriteAtrtibute)
-//      }
-//
-//
-//    // MARK: Do something
-//
-//    func getStocks()
-//    {
-//        stockSegmentedControl.isHidden = false
-//        let text = self.navigationItem.titleView?.subviews.first as! InsetableTextField
-//        text.text = ""
-//        stockActivityIndicator.isHidden = false
-//        interactor?.makeRequest(request: .getStocks)
-//    }
-//
-//    func getFavouriteStocks() {
-////        stockActivityIndicator.startAnimating()
-//        interactor?.makeRequest(request: .getFavouriteStocks)
-//    }
-//
-//    func getSearch(request: String) {
-////        stockActivityIndicator.startAnimating()
-//        stockActivityIndicator.isHidden = false
-//        interactor?.makeRequest(request: .getSearch(request: request))
-//    }
-//
-//
-//    func displayData(viewModel: StockModel.Model.ViewModel.ViewModelData)
-//    {
-//        switch viewModel {
-//
-//        case .displayStock(stockViewModel: let stockViewModel):
-//            self.stockViewModel = stockViewModel
-//            stockTableView.reloadData()
-//        case .hideActivityIndicator:
-//            stockActivityIndicator.isHidden = true
-//            stockTableView.reloadData()
-//        }
-//    }
-//
-//// MARK: Delegates
-//    func change(to index: Int) {
-//        if index == 1 {
-//            getFavouriteStocks()
-//            pickedStocksSegment = false
-//        } else {
-//            pickedStocksSegment = true
-//            getStocks()
-//            // запихать в операции и отменять при изменении сегмента
-//        }
-//    }
-//
-//    func textFieldDidChange(to value: String, isChange: Bool) {
-//        if isChange {
-//            print("textFieldDidChange")
-//            stockSegmentedControl.isHidden = true
-//            print(value, 12e232)
-//            textFieldValue = value
-//            if value != "" {
-//                getSearch(request: value)
-//            }
-//        } else {
-//            print("textFieldEndChange", value)
-//            if value == "" {
-//            stockSegmentedControl.isHidden = false
-//                getStocks()
-//
-//            }
-//        }
-//    }
-//
-//    private func setupTopBars() {
-//
-//        self.navigationController?.navigationBar.barTintColor = .white
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-//        self.navigationItem.titleView = titleView
-//    }
-//
-//    @objc func didTapView(){
-//        self.navigationItem.titleView?.endEditing(true)
-//    }
-////    @objc func textFieldDidChange() {
-////        print("textFieldDidChange")
-////    }
-//}
-//

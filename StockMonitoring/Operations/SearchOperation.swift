@@ -21,7 +21,7 @@ class SearchOperation: AsyncOperation {
         super.init()
     }
     override public func main() {
-        if self.isCancelled { print("cancelcancelcancelcancel SearchOperation cancelcancelcancelcancel"); return }
+        if self.isCancelled { return }
         guard let requestString = request else { return }
         NetworkDataFetcher(networking: NetworkService()).getSearchResponse(value: requestString) { [ weak self ] (searchResult) in
             guard let searchResult = searchResult else { return }
@@ -31,7 +31,7 @@ class SearchOperation: AsyncOperation {
                     array.append(value.symbol)
                         }
                     }
-            if self?.isCancelled == true { print("cancelcancelcancelcancel SearchOperation cancelcancelcancelcancel"); return }
+            if self?.isCancelled == true { return }
             self?.stringRequest = array.joined(separator:",")
             self?.state = .finished
         }

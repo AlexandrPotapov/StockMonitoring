@@ -8,12 +8,10 @@
 import Foundation
 
 class GetStockOperation: AsyncOperation {
+    
     private var foundStocks: [Stock]?
-    
-    var listParam = "most_actives"
-    var startParam = 0
-    
-    
+    private var listParam = "most_actives"
+    private var startParam = 0
     private let completion: ([Stock]?) -> ()
     
     public init(_ listParam: String, _ startParam: Int, completion: @escaping ([Stock]?) -> ()) {
@@ -43,7 +41,6 @@ class GetStockOperation: AsyncOperation {
             self.completion(foundStocks)
             self.state = .finished
         }
-//        print("FoundStocksOutputOperation finish", foundStocks)
 
     }
 }
