@@ -16,3 +16,15 @@ struct Stock {
     var isFavourite: Bool = false
 }
 
+//struct StockViewModel {
+//    struct Cell: StockCellViewModel {
+//        var ticker: String?
+//        var name: String?
+//        var price: Double?
+//        var change: Double?
+//        var changePercent: Double?
+//        var isFavorite: Bool?
+//    }
+//    
+//    let cells: [Cell]
+//}

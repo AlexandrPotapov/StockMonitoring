@@ -7,7 +7,7 @@ protocol Networking {
 
 final class NetworkService: Networking {
     
-    private let apiKey: String = "58C4eIKJUBOaPdu3BiADbi2KFBstyb9ofVLekpFS59NBfnBFWwyD7B84HzId"
+    private let apiKey: String = "demo"
 
     private let token: String = "c1r91biad3iatqdnjfs0"
 

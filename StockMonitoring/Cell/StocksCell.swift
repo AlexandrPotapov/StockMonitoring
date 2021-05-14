@@ -34,15 +34,15 @@ class StocksCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func set(viewModel: StockCellViewModel) {
+    func set(stock: Stock) {
         var price = "-"
         var name: String!
-        if var _price = viewModel.price {
+        if var _price = stock.price {
             _price = Double(round(100*_price)/100)
             
             price = "$" + String(_price)
         }
-        if var change = viewModel.change {
+        if var change = stock.change {
             change = Double(round(100*change)/100)
             if change < 0 {
                 self.change.text = "-$" + String(abs(change))
@@ -54,7 +54,7 @@ class StocksCell: UITableViewCell {
         } else {
             self.change.text = "-"
         }
-        if var changePercent = viewModel.changePercent {
+        if var changePercent = stock.changePercent {
             changePercent = Double(round(100*changePercent)/100)
             self.changePercent.text = "(" + String(abs(changePercent)) + "%" + ")"
             if changePercent < 0 {
@@ -66,15 +66,15 @@ class StocksCell: UITableViewCell {
             self.changePercent.text = "-"
         }
         
-        if let nameCompany = viewModel.name {
+        if let nameCompany = stock.nameCompany {
             name = nameCompany
         }
         
-        symbol.text = viewModel.ticker
-        nameCompany.text = viewModel.name
+        symbol.text = stock.ticker
+        nameCompany.text = stock.nameCompany
         stockLabel.text = String(name[name.startIndex])
         priceStock.text = price
-        if viewModel.isFavorite == false {
+        if stock.isFavourite == false {
             favouriteImage.image = UIImage(named: "STAR2")
         } else {
             favouriteImage.image = UIImage(named: "Star")

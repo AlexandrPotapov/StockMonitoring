@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GetStockOperation: AsyncOperation {
+class GetStocksOperation: AsyncOperation {
     
     private var foundStocks: [Stock]?
     private var listParam = "most_actives"

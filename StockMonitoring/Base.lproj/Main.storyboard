@@ -16,16 +16,16 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Stock View Controller-->
+        <!--Stock List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="StockViewController" customModule="StockMonitoring" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="StockListViewController" customModule="StockMonitoring" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dx7-Xw-Cbx">
-                                <rect key="frame" x="16" y="194" width="382" height="598"/>
+                                <rect key="frame" x="16" y="76" width="382" height="716"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="scrollIndicatorInsets" minX="0.0" minY="8" maxX="0.0" maxY="0.0"/>
                                 <connections>
@@ -33,107 +33,30 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="Y3A-IE-hFL"/>
                                 </connections>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="WGa-Oc-mbY">
-                                <rect key="frame" x="0.0" y="44" width="414" height="150"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2UY-jn-lQE">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="XQb-Av-MhP"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kOK-VK-cdg">
-                                        <rect key="frame" x="0.0" y="40" width="414" height="26"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="1q4-Tl-LE8"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGf-xy-tNL" customClass="StocksSegmentedControl" customModule="StockMonitoring" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="66" width="374" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="6Nl-zq-6kh"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Av1-2q-ur3">
-                                        <rect key="frame" x="0.0" y="98" width="414" height="12"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="12" id="2L6-ze-lWe"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qpa-4G-5vz">
-                                        <rect key="frame" x="0.0" y="110" width="414" height="40"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ugG-fb-oNr">
-                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
-                                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="1" id="SgX-3X-d5M"/>
-                                                </constraints>
-                                            </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91X-de-pG9">
-                                                <rect key="frame" x="20" y="16" width="63" height="24"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="24" id="8BP-fT-NFW"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="18"/>
-                                                <state key="normal" title="Stocks">
-                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
-                                        </subviews>
-                                        <constraints>
-                                            <constraint firstItem="ugG-fb-oNr" firstAttribute="leading" secondItem="Qpa-4G-5vz" secondAttribute="leading" id="9C5-SR-vym"/>
-                                            <constraint firstAttribute="bottom" secondItem="91X-de-pG9" secondAttribute="bottom" id="Egz-qK-zIL"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="91X-de-pG9" secondAttribute="trailing" constant="20" symbolic="YES" id="HcX-1U-6HK"/>
-                                            <constraint firstAttribute="height" constant="40" id="XpS-Vb-WZx"/>
-                                            <constraint firstItem="91X-de-pG9" firstAttribute="leading" secondItem="Qpa-4G-5vz" secondAttribute="leading" constant="20" id="dam-0W-hKw"/>
-                                            <constraint firstAttribute="trailing" secondItem="ugG-fb-oNr" secondAttribute="trailing" id="kGM-4Z-hxa"/>
-                                            <constraint firstItem="ugG-fb-oNr" firstAttribute="top" secondItem="Qpa-4G-5vz" secondAttribute="top" id="uru-1H-iMa"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KGf-xy-tNL" customClass="StocksSegmentedControl" customModule="StockMonitoring" customModuleProvider="target">
+                                <rect key="frame" x="20" y="44" width="374" height="32"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="KGf-xy-tNL" secondAttribute="trailing" constant="20" id="2lQ-aS-rbH"/>
-                                    <constraint firstItem="Av1-2q-ur3" firstAttribute="leading" secondItem="WGa-Oc-mbY" secondAttribute="leading" id="CGf-3g-h5I"/>
-                                    <constraint firstAttribute="trailing" secondItem="Av1-2q-ur3" secondAttribute="trailing" id="HmR-MR-6ha"/>
-                                    <constraint firstAttribute="trailing" secondItem="kOK-VK-cdg" secondAttribute="trailing" id="L1V-Rh-9yz"/>
-                                    <constraint firstItem="KGf-xy-tNL" firstAttribute="leading" secondItem="WGa-Oc-mbY" secondAttribute="leading" constant="20" id="VJS-sO-o7I"/>
-                                    <constraint firstAttribute="trailing" secondItem="Qpa-4G-5vz" secondAttribute="trailing" id="h9e-OD-i17"/>
-                                    <constraint firstItem="kOK-VK-cdg" firstAttribute="leading" secondItem="WGa-Oc-mbY" secondAttribute="leading" id="nJ2-ha-hOj"/>
-                                    <constraint firstItem="Qpa-4G-5vz" firstAttribute="leading" secondItem="WGa-Oc-mbY" secondAttribute="leading" id="wf5-aw-wxm"/>
+                                    <constraint firstAttribute="height" constant="32" id="6Nl-zq-6kh"/>
                                 </constraints>
-                            </stackView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="nYm-M3-f0i">
-                                <rect key="frame" x="197" y="109" width="20" height="20"/>
-                            </activityIndicatorView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WGa-Oc-mbY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="12t-Jc-Vrm"/>
-                            <constraint firstItem="dx7-Xw-Cbx" firstAttribute="top" secondItem="WGa-Oc-mbY" secondAttribute="bottom" id="IBF-cH-u9i"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WGa-Oc-mbY" secondAttribute="trailing" id="L8U-Ng-TYI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="KGf-xy-tNL" secondAttribute="trailing" constant="20" id="86l-xT-7SU"/>
+                            <constraint firstItem="KGf-xy-tNL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="FnX-Vd-wyg"/>
+                            <constraint firstItem="dx7-Xw-Cbx" firstAttribute="top" secondItem="KGf-xy-tNL" secondAttribute="bottom" id="OHN-Ve-kp6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="dx7-Xw-Cbx" secondAttribute="bottom" constant="-56" id="TsV-pM-gWC"/>
                             <constraint firstItem="dx7-Xw-Cbx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="U6z-tk-5Jb"/>
-                            <constraint firstItem="WGa-Oc-mbY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="cV8-eM-bFT"/>
-                            <constraint firstItem="nYm-M3-f0i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="65" id="oyy-sO-eak"/>
-                            <constraint firstItem="nYm-M3-f0i" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sOQ-OA-Lgg"/>
+                            <constraint firstItem="KGf-xy-tNL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Vis-WQ-xkd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dx7-Xw-Cbx" secondAttribute="trailing" constant="16" id="vo2-t5-TPX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HsD-LG-hEC"/>
                     <connections>
-                        <outlet property="searchHeader" destination="Qpa-4G-5vz" id="oo0-61-DJk"/>
-                        <outlet property="stackView" destination="WGa-Oc-mbY" id="fCR-Dz-CGp"/>
-                        <outlet property="stockActivityIndicator" destination="nYm-M3-f0i" id="Xnm-fv-pWi"/>
-                        <outlet property="stockSegmentedControl" destination="KGf-xy-tNL" id="fGt-37-6Op"/>
-                        <outlet property="stockTableView" destination="dx7-Xw-Cbx" id="psF-86-4r9"/>
-                        <outlet property="topPadding36" destination="kOK-VK-cdg" id="kTj-nf-DNI"/>
-                        <outlet property="topPadding40" destination="2UY-jn-lQE" id="WLg-SB-JcO"/>
+                        <outlet property="stockSegmentedControl" destination="KGf-xy-tNL" id="UWv-Bc-Dc1"/>
+                        <outlet property="stockTableView" destination="dx7-Xw-Cbx" id="wZB-Tk-ffg"/>
                         <segue destination="fib-Qf-YES" kind="show" identifier="Card" id="Owr-SN-FQM"/>
                     </connections>
                 </viewController>

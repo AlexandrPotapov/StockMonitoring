@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol StocksSegmentedControlDelegate:class {
-    func change(to index:Int)
+    func changeCegment(to index:Int)
 }
 
 class StocksSegmentedControl: UIView {
@@ -46,7 +46,7 @@ class StocksSegmentedControl: UIView {
             btn.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 18)
             if btn == sender {
                 selectedIndex = buttonIndex
-                delegate?.change(to: selectedIndex)
+                delegate?.changeCegment(to: selectedIndex)
                 btn.setTitleColor(selectorTextColor, for: .normal)
                 btn.titleLabel?.font = UIFont(name: "Montserrat-Bold", size: 28)
             }
