@@ -12,9 +12,14 @@
 
 <div align="center">
 <img src="stockScreen/screen1.png" width="250">
+  
 <img src="stockScreen/screen2.png" width="250">
+
 <img src="stockScreen/screen3.png" width="250">
+
 <img src="stockScreen/screen4.png" width="250">
+
 <img src="stockScreen/screen5.png" width="250">
+
 <img src="stockScreen/screen6.png" width="250">
 </div>
