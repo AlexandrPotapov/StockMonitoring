@@ -13,17 +13,17 @@
 ## **Скриншоты**
 
 <div align="center">
-<img src="stockScreen/screen1.png" width="250" alt="screen1">
+<img src="stockScreen/screen1.png" width="200" alt="screen1">
 
-<img src="stockScreen/screen2.png" width="250" alt="screen2">
+<img src="stockScreen/screen2.png" width="200" alt="screen2">
 
-<img src="stockScreen/screen3.png" width="250" alt="screen3">
+<img src="stockScreen/screen3.png" width="200" alt="screen3">
 
-<img src="stockScreen/screen4.png" width="250" alt="screen4">
+<img src="stockScreen/screen4.png" width="200" alt="screen4">
 
-<img src="stockScreen/screen5.png" width="250" alt="screen5">
+<img src="stockScreen/screen5.png" width="200" alt="screen5">
 
-<img src="stockScreen/screen6.png" width="250" alt="screen6">
+<img src="stockScreen/screen6.png" width="200" alt="screen6">
 </div>
 
 ## **Стек**
