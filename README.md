@@ -11,7 +11,8 @@
 • Пользователь может искать акции по тикеру или названию и добавлять их в избранные.
 
 ## **Скриншоты**
-<img width="200" alt="screen1" src="stockScreen/screen1.png">  
+
+<img src="stockScreen/screen1.png" width="250" alt="screen1">
 
 <img src="stockScreen/screen2.png" width="250" alt="screen2">
 
